@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DevInsight | AI-Powered GitHub Repo Analyzer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🤖</text></svg>">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo">
+                <span class="logo-icon">📊</span>
+                <h1>DevInsight</h1>
+            </div>
+            <p class="tagline">AI-Powered GitHub Repo Analyzer</p>
+            <p class="tagline-sub">No Paid API Required • Free & Open Source</p>
+        </header>
+
+        <!-- Input Section -->
+        <section class="input-section">
+            <div class="input-group">
+                <label for="repo-url">GitHub Repository URL</label>
+                <input 
+                    type="text" 
+                    id="repo-url" 
+                    placeholder="https://github.com/owner/repo"
+                    autocomplete="off"
+                >
+            </div>
+            <button type="button" id="analyze-btn" class="analyze-btn">
+                <span class="btn-text">Analyze Repository</span>
+                <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <path d="M21 21l-4.35-4.35"></path>
+                </svg>
+            </button>
+        </section>
+
+        <!-- Error Display -->
+        <section id="error-section" class="error-section hidden">
+            <div class="error-card">
+                <div class="error-header">
+                    <svg class="error-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <line x1="12" y1="8" x2="12" y2="12"></line>
+                        <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                    </svg>
+                    <h3>Error</h3>
+                </div>
+                <p id="error-message">An error occurred</p>
+                <button type="button" id="retry-btn" class="retry-btn">Try Again</button>
+            </div>
+        </section>
+
+        <!-- Loading Section -->
+        <section id="loading-section" class="loading-section hidden">
+            <div class="loading-content">
+                <div class="loading-dots">
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                </div>
+                <p id="loading-status" class="loading-status">Initializing...</p>
+                <div class="progress-bar">
+                    <div id="progress-fill" class="progress-fill"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Results Section -->
+        <section id="results-section" class="results-section hidden">
+            <!-- Repo Info Header -->
+            <div class="repo-info">
+                <div class="repo-header">
+                    <h2 id="repo-name">Repository Name</h2>
+                    <a id="repo-link" href="#" target="_blank" class="repo-link">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                            <polyline points="15 3 21 3 21 9"></polyline>
+                            <line x1="10" y1="14" x2="21" y2="3"></line>
+                        </svg>
+                        View on GitHub
+                    </a>
+                </div>
+                <p id="repo-description" class="repo-description">Repository description</p>
+                <div class="repo-stats">
+                    <span id="repo-stars" class="stat">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                        </svg>
+                        <span>0</span>
+                    </span>
+                    <span id="repo-forks" class="stat">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="18" r="3"></circle>
+                            <circle cx="6" cy="6" r="3"></circle>
+                            <circle cx="18" cy="6" r="3"></circle>
+                            <path d="M18 9a9 9 0 0 1-9 9"></path>
+                            <path d="M6 9a9 9 0 0 0 9 9"></path>
+                        </svg>
+                        <span>0</span>
+                    </span>
+                    <span id="repo-watchers" class="stat">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                            <circle cx="12" cy="12" r="3"></circle>
+                        </svg>
+                        <span>0</span>
+                    </span>
+                    <span id="repo-issues" class="stat">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <line x1="12" y1="8" x2="12" y2="12"></line>
+                            <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                        </svg>
+                        <span>0</span>
+                    </span>
+                    <span id="repo-language" class="stat language">
+                        <span class="language-dot"></span>
+                        <span>Unknown</span>
+                    </span>
+                </div>
+            </div>
+
+            <!-- Score Cards -->
+            <div class="scores-grid">
+                <div class="score-card" id="score-health">
+                    <div class="score-header">
+                        <span class="score-icon">💚</span>
+                        <h3>Code Health</h3>
+                    </div>
+                    <div class="score-value">
+                        <span class="score-number">0</span>
+                        <span class="score-max">/100</span>
+                    </div>
+                    <div class="score-bar">
+                        <div class="score-fill"></div>
+                    </div>
+                    <p class="score-label">Based on issues, updates, activity</p>
+                </div>
+                <div class="score-card" id="score-maintenance">
+                    <div class="score-header">
+                        <span class="score-icon">🔧</span>
+                        <h3>Maintenance</h3>
+                    </div>
+                    <div class="score-value">
+                        <span class="score-number">0</span>
+                        <span class="score-max">/100</span>
+                    </div>
+                    <div class="score-bar">
+                        <div class="score-fill"></div>
+                    </div>
+                    <p class="score-label">Based on commits, contributors</p>
+                </div>
+                <div class="score-card" id="score-popularity">
+                    <div class="score-header">
+                        <span class="score-icon">⭐</span>
+                        <h3>Popularity</h3>
+                    </div>
+                    <div class="score-value">
+                        <span class="score-number">0</span>
+                        <span class="score-max">/100</span>
+                    </div>
+                    <div class="score-bar">
+                        <div class="score-fill"></div>
+                    </div>
+                    <p class="score-label">Based on stars, forks, watchers</p>
+                </div>
+            </div>
+
+            <!-- Metrics Grid -->
+            <div class="metrics-section">
+                <h3 class="section-title">📈 Repository Metrics</h3>
+                <div class="metrics-grid">
+                    <div class="metric-card">
+                        <div class="metric-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="4"></circle>
+                                <line x1="1.05" y1="12" x2="7" y2="12"></line>
+                                <line x1="17.01" y1="12" x2="22.96" y2="12"></line>
+                            </svg>
+                        </div>
+                        <div class="metric-content">
+                            <span class="metric-label">Last Updated</span>
+                            <span class="metric-value" id="metric-last-update">-</span>
+                        </div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="9" cy="7" r="4"></circle>
+                                <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                                <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                            </svg>
+                        </div>
+                        <div class="metric-content">
+                            <span class="metric-label">Contributors</span>
+                            <span class="metric-value" id="metric-contributors">-</span>
+                        </div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <line x1="8" y1="6" x2="21" y2="6"></line>
+                                <line x1="8" y1="12" x2="21" y2="12"></line>
+                                <line x1="8" y1="18" x2="21" y2="18"></line>
+                                <line x1="3" y1="6" x2="3.01" y2="6"></line>
+                                <line x1="3" y1="12" x2="3.01" y2="12"></line>
+                                <line x1="3" y1="18" x2="3.01" y2="18"></line>
+                            </svg>
+                        </div>
+                        <div class="metric-content">
+                            <span class="metric-label">Total Commits</span>
+                            <span class="metric-value" id="metric-commits">-</span>
+                        </div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                                <polyline points="14 2 14 8 20 8"></polyline>
+                            </svg>
+                        </div>
+                        <div class="metric-content">
+                            <span class="metric-label">Branch</span>
+                            <span class="metric-value" id="metric-branch">-</span>
+                        </div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                            </svg>
+                        </div>
+                        <div class="metric-content">
+                            <span class="metric-label">License</span>
+                            <span class="metric-value" id="metric-license">-</span>
+                        </div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="16 18 22 12 16 6"></polyline>
+                                <polyline points="8 6 2 12 8 18"></polyline>
+                            </svg>
+                        </div>
+                        <div class="metric-content">
+                            <span class="metric-label">Languages</span>
+                            <span class="metric-value" id="metric-languages">-</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- AI Recommendations -->
+            <div class="recommendations-section">
+                <h3 class="section-title">🤖 AI-Style Recommendations</h3>
+                <div id="recommendations-content" class="recommendations-content">
+                    <!-- Recommendations will be inserted here -->
+                </div>
+            </div>
+
+            <!-- Languages Section -->
+            <div class="languages-section">
+                <h3 class="section-title">💻 Languages Used</h3>
+                <div id="languages-chart" class="languages-chart">
+                    <!-- Language bars will be inserted here -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>🤖 AI-Powered GitHub Repository Analyzer</p>
+        </footer>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
+
