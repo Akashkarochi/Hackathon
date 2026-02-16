@@ -1,24 +1,99 @@
-# 🚀 DevInsight – GitHub Repository Health Analyzer
-
-![GitHub Repo Size](https://img.shields.io/github/repo-size/Akashkarochi/Hackathon)
-![GitHub Stars](https://img.shields.io/github/stars/Akashkarochi/Hackathon?style=social)
-![GitHub Forks](https://img.shields.io/github/forks/Akashkarochi/Hackathon?style=social)
-![Language](https://img.shields.io/github/languages/top/Akashkarochi/Hackathon)
-![Last Commit](https://img.shields.io/github/last-commit/Akashkarochi/Hackathon)
-![License](https://img.shields.io/github/license/Akashkarochi/Hackathon)
-![Netlify](https://img.shields.io/badge/Deployed%20on-Netlify-brightgreen)
-
-DevInsight is a full-stack platform that analyzes GitHub repository health and provides actionable insights based on key metrics such as stars, forks, issue activity, and update frequency. It helps developers and teams make smarter technical decisions quickly.
-
-🔗 Live Demo: https://gregarious-medovik-528512.netlify.app/
-
-## 🖥️ Application Preview
-
 <p align="center">
-  <img src="assets/preview-1.png" alt="DevInsight Dashboard" width="800"/>
+  <img src="assets/devinsight-banner.png" width="100%" />
 </p>
 
+<h1 align="center">DevInsight</h1>
+<h3 align="center">AI-Powered GitHub Repository Health Analyzer</h3>
+
 <p align="center">
-  <img src="assets/preview-2.png" alt="Repository Metrics View" width="800"/>
+  <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&size=24&duration=2500&pause=1000&color=3BA55D&center=true&vCenter=true&width=800&lines=Real-Time+Repository+Analysis;Custom+Health+Scoring+Algorithm;Built+With+Java+%7C+HTML+%7C+CSS+%7C+JavaScript" />
 </p>
 
+---
+
+## 🏆 Badges
+
+<p align="center">
+
+<img src="https://img.shields.io/github/repo-size/Akashkarochi/Hackathon" />
+<img src="https://img.shields.io/github/stars/Akashkarochi/Hackathon?style=social" />
+<img src="https://img.shields.io/github/forks/Akashkarochi/Hackathon?style=social" />
+<img src="https://img.shields.io/github/languages/top/Akashkarochi/Hackathon" />
+<img src="https://img.shields.io/github/last-commit/Akashkarochi/Hackathon" />
+<img src="https://img.shields.io/github/issues/Akashkarochi/Hackathon" />
+<img src="https://img.shields.io/github/contributors/Akashkarochi/Hackathon" />
+<img src="https://img.shields.io/badge/Deployment-Netlify-brightgreen" />
+
+</p>
+
+---
+
+# 🌐 Live Demo
+
+🔗 https://gregarious-medovik-528512.netlify.app/
+
+---
+
+# 🖥️ Application Preview
+
+<p align="center">
+  <a href="https://gregarious-medovik-528512.netlify.app/" target="_blank">
+    <img src="assets/preview-1.png" width="48%"/>
+    <img src="assets/preview-2.png" width="48%"/>
+  </a>
+</p>
+
+---
+
+# 📌 Problem
+
+Developers often rely on fragmented GitHub metrics to evaluate repository quality. There is no structured, unified health scoring system.
+
+DevInsight solves this by aggregating repository data and generating a composite health score.
+
+---
+
+# ⚡ Features
+
+- Real-time GitHub API Integration  
+- Repository Health Score Engine  
+- Popularity & Maintenance Metrics  
+- Contributor & Commit Tracking  
+- Responsive UI  
+- Lightweight & Fast  
+
+---
+
+# 🛠️ Tech Stack
+
+### Frontend
+- HTML5  
+- CSS3  
+- JavaScript  
+
+### Backend
+- Java  
+- REST API  
+- GitHub Public API  
+
+### Deployment
+- Netlify  
+
+---
+
+# 🧠 Architecture
+
+```text
+User Input
+    ↓
+Frontend (HTML/CSS/JS)
+    ↓
+Java Backend API
+    ↓
+GitHub REST API
+    ↓
+Data Processing Layer
+    ↓
+Health Score Algorithm
+    ↓
+Insights Dashboard
