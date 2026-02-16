@@ -11,3 +11,14 @@
 DevInsight is a full-stack platform that analyzes GitHub repository health and provides actionable insights based on key metrics such as stars, forks, issue activity, and update frequency. It helps developers and teams make smarter technical decisions quickly.
 
 🔗 Live Demo: https://gregarious-medovik-528512.netlify.app/
+
+## 🖥️ Application Preview
+
+<p align="center">
+  <img src="assets/preview-1.png" alt="DevInsight Dashboard" width="800"/>
+</p>
+
+<p align="center">
+  <img src="assets/preview-2.png" alt="Repository Metrics View" width="800"/>
+</p>
+
