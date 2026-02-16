@@ -97,3 +97,39 @@ Data Processing Layer
 Health Score Algorithm
     ↓
 Insights Dashboard
+```
+
+
+📊 Health Score Model
+
+Health score is calculated using weighted metrics:
+
+Issue Resolution Ratio
+
+Commit Frequency
+
+Contributor Engagement
+
+Popularity (Stars/Forks)
+
+Update Recency
+
+📈 Developer Activity
+
+🚀 Future Roadmap
+
+AI-powered repository recommendations
+
+Interactive data visualizations
+
+Authentication & saved history
+
+Exportable analytics reports
+
+👨‍💻 Author
+
+Akash Karochi
+Full Stack Web Developer
+
+<p align="center"> <a href="https://www.linkedin.com/"> <img src="https://img.shields.io/badge/LinkedIn-Connect-blue?style=for-the-badge&logo=linkedin" /> </a> <a href="https://gregarious-medovik-528512.netlify.app/"> <img src="https://img.shields.io/badge/Live-Demo-black?style=for-the-badge" /> </a> </p>
+<p align="center"> ⭐ If you found this project useful, consider giving it a star! </p>
